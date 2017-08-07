@@ -3,8 +3,8 @@ package br.com.caelum.financas.teste;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
+import br.com.caelum.financas.dao.MovimentacaoDao;
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
 import br.com.caelum.financas.modelo.TipoMovimentacao;
@@ -16,15 +16,12 @@ public class TestaConsulta {
 
 		EntityManager manager = new JPAUtil().getEntityManager();
 
+		MovimentacaoDao dao = new MovimentacaoDao(manager);
+
 		Conta conta = new Conta();
 		conta.setId(2);
 
-		Query query = manager.createQuery("select m from Movimentacao m where m.conta = :pConta "
-				+ "and m.tipoMovimentacao = :pTipo " + "order by m.valor desc");
-		query.setParameter("pConta", conta);
-		query.setParameter("pTipo", TipoMovimentacao.SAIDA);
-
-		List<Movimentacao> movimentacoes = query.getResultList();
+		List<Movimentacao> movimentacoes = dao.buscaPelaContaETipo(conta, TipoMovimentacao.SAIDA);
 
 		for (Movimentacao m : movimentacoes) {
 			System.out.println("\nDescricao ..: " + m.getDescricao());

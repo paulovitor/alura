@@ -3,8 +3,8 @@ package br.com.caelum.financas.teste;
 import java.math.BigDecimal;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 
+import br.com.caelum.financas.dao.MovimentacaoDao;
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.util.JPAUtil;
 
@@ -16,12 +16,10 @@ public class TesteConsultaFuncaoMax {
 
 		Conta conta = new Conta();
 		conta.setId(1);
+		
+		MovimentacaoDao dao = new MovimentacaoDao(manager);
 
-		TypedQuery<BigDecimal> query = manager
-				.createQuery("select max(m.valor) from Movimentacao m where m.conta = :pConta", BigDecimal.class);
-		query.setParameter("pConta", conta);
-
-		BigDecimal result = query.getSingleResult();
+		BigDecimal result = dao.maximoPelaConta(conta);
 
 		System.out.println("Máximo movimentado ..: R$ " + result);
 	}
