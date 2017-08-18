@@ -15,16 +15,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedEntityGraphs;
+import javax.persistence.Version;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-@NamedEntityGraphs({ 
-	@NamedEntityGraph(name = "produtoComCategoria", attributeNodes = {
-		@NamedAttributeNode("categorias")	
-	}) 
-})
+@NamedEntityGraphs({
+		@NamedEntityGraph(name = "produtoComCategoria", attributeNodes = { @NamedAttributeNode("categorias") }) })
 
 @Entity
 public class Produto {
@@ -51,6 +49,9 @@ public class Produto {
 	@ManyToMany
 	@JoinTable(name = "CATEGORIA_PRODUTO")
 	private List<Categoria> categorias = new ArrayList<>();
+
+	@Version
+	private Integer versao;
 
 	public String getDescricao() {
 		return descricao;
@@ -114,4 +115,11 @@ public class Produto {
 		this.categorias = categorias;
 	}
 
+	public Integer getVersao() {
+		return versao;
+	}
+
+	public void setVersao(Integer versao) {
+		this.versao = versao;
+	}
 }
