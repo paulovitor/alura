@@ -60,6 +60,8 @@ public class ProdutoDao {
 
 		TypedQuery<Produto> typedQuery = em.createQuery(query).setHint("javax.persistence.loadgraph",
 				em.getEntityGraph("produtoComCategoria"));
+		typedQuery.setHint("org.hibernate.cacheable", "true");
+
 		return typedQuery.getResultList();
 
 	}
