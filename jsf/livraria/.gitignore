@@ -1,0 +1,20 @@
+# Binaries
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.war
+*.ear
+*.sar
+*.class
+
+.DS_Store
+
+# eclipse project file
+.settings/
+.classpath
+.project
