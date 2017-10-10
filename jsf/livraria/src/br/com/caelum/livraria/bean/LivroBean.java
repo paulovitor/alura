@@ -29,7 +29,10 @@ public class LivroBean {
 			return;
 		}
 
-		new DAO<Livro>(Livro.class).adiciona(livro);
+		if (this.livro.getId() == null)
+			new DAO<Livro>(Livro.class).adiciona(livro);
+		else
+			new DAO<Livro>(Livro.class).atualiza(this.livro);
 
 		livro = new Livro();
 	}
@@ -50,9 +53,22 @@ public class LivroBean {
         System.out.println("Chamanda o formulario do Autor");
         return "autor?faces-redirect=true";
     }
+	
+	public void remover(Livro livro) {
+	    System.out.println("Removendo livro " + livro.getTitulo());
+	    new DAO<Livro>(Livro.class).remove(livro);
+	}
+	
+	public void removerAutorDoLivro(Autor autor) {
+	    this.livro.removeAutor(autor);
+	}
 
 	public Livro getLivro() {
 		return livro;
+	}
+
+	public void setLivro(Livro livro) {
+		this.livro = livro;
 	}
 
 	public List<Livro> getLivros() {
