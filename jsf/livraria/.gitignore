@@ -15,7 +15,8 @@
 .DS_Store
 
 # eclipse project file
+build/
 .settings/
+.metadata/
 .classpath
 .project
-/bin/
