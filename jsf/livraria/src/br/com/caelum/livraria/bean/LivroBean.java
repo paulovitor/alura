@@ -19,6 +19,7 @@ public class LivroBean {
 
 	private Livro livro = new Livro();
 	private Integer autorId;
+	private Integer livroId;
 
 	public void gravar() {
 		System.out.println("Gravando livro " + this.livro.getTitulo());
@@ -48,20 +49,24 @@ public class LivroBean {
 			throw new ValidatorException(new FacesMessage("Deveria começar com 1"));
 		}
 	}
-	
+
 	public String formAutor() {
-        System.out.println("Chamanda o formulario do Autor");
-        return "autor?faces-redirect=true";
-    }
-	
+		System.out.println("Chamanda o formulario do Autor");
+		return "autor?faces-redirect=true";
+	}
+
 	public void remover(Livro livro) {
-	    System.out.println("Removendo livro " + livro.getTitulo());
-	    new DAO<Livro>(Livro.class).remove(livro);
+		System.out.println("Removendo livro " + livro.getTitulo());
+		new DAO<Livro>(Livro.class).remove(livro);
+	}
+
+	public void removerAutorDoLivro(Autor autor) {
+		this.livro.removeAutor(autor);
 	}
 	
-	public void removerAutorDoLivro(Autor autor) {
-	    this.livro.removeAutor(autor);
-	}
+	public void carregaPelaId() {
+        this.livro = new DAO<Livro>(Livro.class).buscaPorId(this.livroId);
+    }
 
 	public Livro getLivro() {
 		return livro;
@@ -89,5 +94,13 @@ public class LivroBean {
 
 	public void setAutorId(Integer autorId) {
 		this.autorId = autorId;
+	}
+
+	public Integer getLivroId() {
+		return livroId;
+	}
+
+	public void setLivroId(Integer livroId) {
+		this.livroId = livroId;
 	}
 }
