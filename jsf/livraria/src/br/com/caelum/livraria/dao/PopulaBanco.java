@@ -52,6 +52,7 @@ public class PopulaBanco {
 		em.persist(capitaes);
 		em.persist(flor);
 		
+		// INSERT INTO Usuario (email, senha) VALUES ('ze@caelum.com.br', '12345');
 		Usuario usuario = new Usuario();
 		usuario.setEmail("ze@caelum.com.br");
 		usuario.setSenha("12345");

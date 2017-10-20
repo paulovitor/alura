@@ -18,7 +18,7 @@
 				<h:panelGrid columns="3">
 
 					<h:outputLabel value="Email:" for="email" />
-					<input type="email" jsf:id="email" jsf:value="#{autorBean.autor.email}" />
+					<input type="email" jsf:id="email" jsf:value="#{loginBean.usuario.email}" />
 
 					<h:message for="email" id="messageEmail" />
 
@@ -28,7 +28,7 @@
 					<h:message for="senha" id="messageSenha" />
 
 					<h:commandButton value="Efetuar Login"
-						action="#{loginBean.efetuaLogin}" />
+						action="#{loginBean.efetuaLogin()}" />
 				</h:panelGrid>
 			</fieldset>
 		</h:form>
