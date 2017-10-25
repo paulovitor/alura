@@ -24,14 +24,14 @@ public class LivroBean {
 	public void gravar() {
 		System.out.println("Gravando livro " + this.livro.getTitulo());
 
-		if (livro.getAutores().isEmpty()) {
+		if (this.livro.getAutores().isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage("autor",
 					new FacesMessage("Livro deve ter pelo menos um Autor"));
 			return;
 		}
 
 		if (this.livro.getId() == null)
-			new DAO<Livro>(Livro.class).adiciona(livro);
+			new DAO<Livro>(Livro.class).adiciona(this.livro);
 		else
 			new DAO<Livro>(Livro.class).atualiza(this.livro);
 
