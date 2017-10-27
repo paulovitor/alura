@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 public class DAO<T> {
 
@@ -71,7 +72,7 @@ public class DAO<T> {
 
 	public int contaTodos() {
 		EntityManager em = new JPAUtil().getEntityManager();
-		long result = (Long) em.createQuery("select count(n) from livro n")
+		long result = (Long) em.createQuery("select count(n) from " + classe.getSimpleName() + " n")
 				.getSingleResult();
 		em.close();
 
@@ -90,4 +91,17 @@ public class DAO<T> {
 		return lista;
 	}
 
+	public List<T> listaTodosPaginada(int firstResult, int maxResults, String coluna, String valor) {
+	    EntityManager em = new JPAUtil().getEntityManager();
+	    CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
+	    Root<T> root = query.from(classe);
+
+	    if(valor != null)
+	        query = query.where(em.getCriteriaBuilder().like(root.<String>get(coluna), valor + "%"));
+
+	    List<T> lista = em.createQuery(query).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+
+	    em.close();
+	    return lista;
+	}
 }

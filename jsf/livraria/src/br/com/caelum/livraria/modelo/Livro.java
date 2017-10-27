@@ -20,6 +20,7 @@ public class Livro {
 	private Integer id;
 
 	private String titulo;
+	private String genero;
 	private String isbn;
 	private double preco;
 
@@ -39,7 +40,7 @@ public class Livro {
 
 	public Livro() {
 	}
-	
+
 	public void removeAutor(Autor autor) {
 		autores.remove(autor);
 	}
@@ -58,6 +59,14 @@ public class Livro {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public String getGenero() {
+		return genero;
 	}
 
 	public String getIsbn() {
