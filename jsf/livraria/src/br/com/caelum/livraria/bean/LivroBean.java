@@ -10,9 +10,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.caelum.livraria.dao.DAO;
+import br.com.caelum.livraria.dao.AutorDao;
+import br.com.caelum.livraria.dao.LivroDao;
 import br.com.caelum.livraria.modelo.Autor;
 import br.com.caelum.livraria.modelo.Livro;
 import br.com.caelum.livraria.modelo.LivroDataModel;
@@ -27,8 +29,17 @@ public class LivroBean implements Serializable {
 	private Integer autorId;
 	private Integer livroId;
 	private List<Livro> livros;
-	private LivroDataModel livroDataModel = new LivroDataModel();
+	
+	@Inject
+	private LivroDataModel livroDataModel;
+	
 	private List<String> generos = Arrays.asList("Romance", "Drama", "Ação");
+	
+	@Inject
+	private LivroDao dao;
+	
+	@Inject
+	private AutorDao autorDao;
 
 	public void gravar() {
 		System.out.println("Gravando livro " + this.livro.getTitulo());
@@ -39,7 +50,6 @@ public class LivroBean implements Serializable {
 			return;
 		}
 
-		DAO<Livro> dao = new DAO<Livro>(Livro.class);
 		if (this.livro.getId() == null) {
 			dao.adiciona(this.livro);
 
@@ -51,7 +61,7 @@ public class LivroBean implements Serializable {
 	}
 
 	public void gravarAutor() {
-		Autor autor = new DAO<Autor>(Autor.class).buscaPorId(autorId);
+		Autor autor = autorDao.buscaPorId(autorId);
 		livro.adicionaAutor(autor);
 	}
 
@@ -69,7 +79,7 @@ public class LivroBean implements Serializable {
 
 	public void remover(Livro livro) {
 		System.out.println("Removendo livro " + livro.getTitulo());
-		new DAO<Livro>(Livro.class).remove(livro);
+		dao.remove(livro);
 	}
 
 	public void removerAutorDoLivro(Autor autor) {
@@ -77,7 +87,7 @@ public class LivroBean implements Serializable {
 	}
 
 	public void carregaPelaId() {
-		this.livro = new DAO<Livro>(Livro.class).buscaPorId(this.livroId);
+		this.livro = dao.buscaPorId(this.livroId);
 	}
 
 	public boolean precoEhMenor(Object valorColuna, Object filtroDigitado, Locale locale) {
@@ -121,17 +131,14 @@ public class LivroBean implements Serializable {
 	}
 
 	public List<Livro> getLivros() {
-		DAO<Livro> dao = new DAO<Livro>(Livro.class);
-
-		if (this.livros == null) {
+		if (this.livros == null)
 			this.livros = dao.listaTodos();
-		}
 
 		return livros;
 	}
 
 	public List<Autor> getAutores() {
-		return new DAO<Autor>(Autor.class).listaTodos();
+		return autorDao.listaTodos();
 	}
 
 	public List<Autor> getAutoresDoLivro() {
