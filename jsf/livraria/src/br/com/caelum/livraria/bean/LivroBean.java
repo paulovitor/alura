@@ -18,6 +18,7 @@ import br.com.caelum.livraria.dao.LivroDao;
 import br.com.caelum.livraria.modelo.Autor;
 import br.com.caelum.livraria.modelo.Livro;
 import br.com.caelum.livraria.modelo.LivroDataModel;
+import br.com.caelum.livraria.tx.Transacional;
 
 @Named
 @ViewScoped
@@ -41,6 +42,7 @@ public class LivroBean implements Serializable {
 	@Inject
 	private AutorDao autorDao;
 
+	@Transacional
 	public void gravar() {
 		System.out.println("Gravando livro " + this.livro.getTitulo());
 
@@ -77,6 +79,7 @@ public class LivroBean implements Serializable {
 		return "autor?faces-redirect=true";
 	}
 
+	@Transacional
 	public void remover(Livro livro) {
 		System.out.println("Removendo livro " + livro.getTitulo());
 		dao.remove(livro);
@@ -88,6 +91,11 @@ public class LivroBean implements Serializable {
 
 	public void carregaPelaId() {
 		this.livro = dao.buscaPorId(this.livroId);
+	}
+	
+	public void carregar(Livro livro) {
+		System.out.println("Carregando livro");
+		this.livro = livro;
 	}
 
 	public boolean precoEhMenor(Object valorColuna, Object filtroDigitado, Locale locale) {
