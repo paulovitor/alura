@@ -9,14 +9,14 @@ import javax.inject.Inject;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
-import br.com.caelum.livraria.dao.LivroDao;
+import br.com.caelum.livraria.dao.LivroDAO;
 
 public class LivroDataModel extends LazyDataModel<Livro> {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private LivroDao dao;
+	private LivroDAO dao;
 
 	@PostConstruct
 	void init() {

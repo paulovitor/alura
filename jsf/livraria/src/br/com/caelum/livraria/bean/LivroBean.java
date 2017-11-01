@@ -13,8 +13,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.caelum.livraria.dao.AutorDao;
-import br.com.caelum.livraria.dao.LivroDao;
+import br.com.caelum.livraria.dao.AutorDAO;
+import br.com.caelum.livraria.dao.LivroDAO;
 import br.com.caelum.livraria.modelo.Autor;
 import br.com.caelum.livraria.modelo.Livro;
 import br.com.caelum.livraria.modelo.LivroDataModel;
@@ -37,10 +37,10 @@ public class LivroBean implements Serializable {
 	private List<String> generos = Arrays.asList("Romance", "Drama", "Ação");
 	
 	@Inject
-	private LivroDao dao;
+	private LivroDAO dao;
 	
 	@Inject
-	private AutorDao autorDao;
+	private AutorDAO autorDao;
 
 	@Transacional
 	public void gravar() {
@@ -95,7 +95,7 @@ public class LivroBean implements Serializable {
 	
 	public void carregar(Livro livro) {
 		System.out.println("Carregando livro");
-		this.livro = livro;
+		this.livro = dao.buscaPorId(livro.getId());
 	}
 
 	public boolean precoEhMenor(Object valorColuna, Object filtroDigitado, Locale locale) {

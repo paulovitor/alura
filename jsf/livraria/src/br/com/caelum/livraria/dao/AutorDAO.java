@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 
 import br.com.caelum.livraria.modelo.Autor;
 
-public class AutorDao implements Serializable {
+public class AutorDAO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

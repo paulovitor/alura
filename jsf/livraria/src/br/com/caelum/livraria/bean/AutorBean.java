@@ -7,7 +7,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.caelum.livraria.dao.AutorDao;
+import br.com.caelum.livraria.dao.AutorDAO;
 import br.com.caelum.livraria.modelo.Autor;
 import br.com.caelum.livraria.tx.Transacional;
 import br.com.caelum.livraria.util.RedirectView;
@@ -22,7 +22,7 @@ public class AutorBean implements Serializable {
 	private Integer autorId;
 	
 	@Inject
-	private AutorDao dao;
+	private AutorDAO dao;
 
 	@Transacional
 	public RedirectView gravar() {

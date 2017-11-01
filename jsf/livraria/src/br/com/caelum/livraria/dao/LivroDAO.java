@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import br.com.caelum.livraria.modelo.Livro;
 import br.com.caelum.livraria.tx.Log;
 
-public class LivroDao implements Serializable {
+public class LivroDAO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
