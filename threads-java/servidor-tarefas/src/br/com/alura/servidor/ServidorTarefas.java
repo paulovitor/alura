@@ -1,23 +1,51 @@
 package br.com.alura.servidor;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ServidorTarefas {
 
-	public static void main(String[] args) throws Exception {
-		System.out.println("---- Iniciando Servidor ----");
-		ServerSocket servidor = new ServerSocket(12345);
-		ExecutorService poolDeThreads = Executors.newCachedThreadPool();
+	private ServerSocket servidor;
+	private ExecutorService threadPool;
+	private AtomicBoolean estaRodando;
 
-		while (true) {
-			Socket socket = servidor.accept();
-			System.out.println("Aceitando novo cliente na porta " + socket.getPort());
-			
-			DistribuirTarefas distribuirTarefas = new DistribuirTarefas(socket);
-			poolDeThreads.execute(distribuirTarefas);
+	public ServidorTarefas() throws IOException {
+		System.out.println("---- Iniciando Servidor ----");
+		this.servidor = new ServerSocket(12345);
+		this.threadPool = Executors.newCachedThreadPool();
+		this.estaRodando = new AtomicBoolean(true);
+	}
+
+	public static void main(String[] args) throws Exception {
+		ServidorTarefas servidor = new ServidorTarefas();
+		servidor.rodar();
+	}
+
+	private void rodar() throws IOException {
+		while (this.estaRodando.get()) {
+
+			try {
+				Socket socket = this.servidor.accept();
+				System.out.println("Aceitando novo cliente na porta " + socket.getPort());
+
+				DistribuirTarefas distribuirTarefas = new DistribuirTarefas(socket, this);
+
+				this.threadPool.execute(distribuirTarefas);
+			} catch (SocketException e) {
+				System.out.println("SocketException, está rodando? " + this.estaRodando);
+			}
 		}
+	}
+
+	public void parar() throws IOException {
+		System.out.println("Parando servidor");
+		this.estaRodando.set(false);
+		this.threadPool.shutdown();
+		this.servidor.close();
 	}
 }

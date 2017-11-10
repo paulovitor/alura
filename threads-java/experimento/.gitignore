@@ -1,0 +1,12 @@
+# Binaries
+*.class
+
+.DS_Store
+
+# eclipse project file
+bin/
+build/
+.settings/
+.metadata/
+.classpath
+.project
