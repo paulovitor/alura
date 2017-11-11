@@ -3,13 +3,16 @@ package br.com.alura.servidor;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
 
 public class DistribuirTarefas implements Runnable {
 
+	private ExecutorService threadPool;
 	private Socket socket;
 	private ServidorTarefas servidorTarefas;
 
-	public DistribuirTarefas(Socket socket, ServidorTarefas servidorTarefas) {
+	public DistribuirTarefas(ExecutorService threadPool, Socket socket, ServidorTarefas servidorTarefas) {
+		this.threadPool = threadPool;
 		this.socket = socket;
 		this.servidorTarefas = servidorTarefas;
 	}
@@ -26,30 +29,30 @@ public class DistribuirTarefas implements Runnable {
 				System.out.println("Comando recebido " + comando);
 
 				switch (comando) {
-					case "c1": {
-						saidaCliente.println("Confirmação do comando c1");
-						break;
-					}
-					case "c2": {
-						saidaCliente.println("Confirmação do comando c2");
-						break;
-					}
-					case "fim" : {
-				        saidaCliente.println("Desligando o servidor");
-				        servidorTarefas.parar();
-				        return;
-				    }
-					default: {
-						saidaCliente.println("Comando não encontrado");
-					}
+				case "c1": {
+					threadPool.execute(new ComandoC1(saidaCliente));
+					break;
+				}
+				case "c2": {
+					threadPool.execute(new ComandoC2(saidaCliente));
+					break;
+				}
+				case "fim": {
+					saidaCliente.println("Desligando o servidor");
+					servidorTarefas.parar();
+					return;
+				}
+				default: {
+					saidaCliente.println("Comando não encontrado");
+				}
 				}
 
 				System.out.println(comando);
 			}
-			
+
 			saidaCliente.close();
 			entradaCliente.close();
-			
+
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
