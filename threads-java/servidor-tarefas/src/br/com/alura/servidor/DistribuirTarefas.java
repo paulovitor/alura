@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 public class DistribuirTarefas implements Runnable {
 
@@ -29,22 +30,31 @@ public class DistribuirTarefas implements Runnable {
 				System.out.println("Comando recebido " + comando);
 
 				switch (comando) {
-				case "c1": {
-					threadPool.execute(new ComandoC1(saidaCliente));
-					break;
-				}
-				case "c2": {
-					threadPool.execute(new ComandoC2(saidaCliente));
-					break;
-				}
-				case "fim": {
-					saidaCliente.println("Desligando o servidor");
-					servidorTarefas.parar();
-					return;
-				}
-				default: {
-					saidaCliente.println("Comando não encontrado");
-				}
+					case "c1": {
+						threadPool.execute(new ComandoC1(saidaCliente));
+						break;
+					}
+					case "c2": {
+						saidaCliente.println("Confirmação do comando c2");
+	
+						ComandoC2ChamaWs c2WS = new ComandoC2ChamaWs(saidaCliente);
+						ComandoC2AcessaBanco c2Banco = new ComandoC2AcessaBanco(saidaCliente);
+	
+						Future<String> futureWS = threadPool.submit(c2WS);
+						Future<String> futureBanco = threadPool.submit(c2Banco);
+	
+						threadPool.submit(new JuntaResultadosFutureWSFutureBanco(futureWS, futureBanco, saidaCliente));
+	
+						break;
+					}
+					case "fim": {
+						saidaCliente.println("Desligando o servidor");
+						servidorTarefas.parar();
+						return;
+					}
+					default: {
+						saidaCliente.println("Comando não encontrado");
+					}
 				}
 
 				System.out.println(comando);
