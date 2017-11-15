@@ -1,4 +1,4 @@
-<!--`alurapic/src/components/shared/imagem-responsiva/ImagemResponsiva.vue -->
+<!-- alurapic/src/components/shared/imagem-responsiva/ImagemResponsiva.vue -->
 
 <template>
     <img class="imagem-responsiva" :src="url" :alt="titulo">
