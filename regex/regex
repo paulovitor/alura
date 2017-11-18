@@ -29,6 +29,13 @@ Classes de letras
 
 word char \w é um atalho para [A-Za-z0-9_]
 
+âncora\b (word boundary) para selecionar a posição antes ou depois de uma palavra
+inversão do \b, o non-word-boundary: \B (B maiúsculo)
+^ é uma âncora que seleciona o início da string alvo
+$ é uma âncora que seleciona o fim do alvo
+
+--
+
 extensão
 target: imagem.png
 regex:  .*png
@@ -99,3 +106,40 @@ A partir do segundo caractere podemos ter letras maiúsculas, minúsculas e núm
 
 regex: [a-zA-Z][a-zA-Z0-9]{0,9}
        [a-zA-Z]\w{0,9}
+
+achar a preposição de
+target: denise teste, 987.654.321-00,28 de Dezembro de 1991,(31)45562712,SCS Qd. 8 Bl. B-50,11,70333-900,Rio Grande
+regex: \bde\b
+
+achar seguência de três aaa
+target: aaa aaaa aaa aaaa aaa
+regex: \ba{3}\b
+
+validar url
+target: file:///Users/nico/Downloads/regex/index.html
+regex: ^file.+html$
+
+número de CPF
+target: 111.111.111-11
+regex: ^\d{3}\.\d{3}\.\d{3}-\d{2}$
+
+pegar expressão que começa com Caused by:
+target: Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+regex: ^Caused by:.*
+
+strings de data no formato Data: dia/mes/ano ou Data:dia/mes/ano
+target: Data: 02/09/1964 ou Data:02/09/1964
+regex: ^Data:\s{0,}\d{2}\/\d{2}\/\d{4}$
+       ^Data:[\s]?[0-9]{2}\/[0-9]{2}\/[1-9]{4}$
+
+finaliza com .html
+target: não irá funcionar em: index.htmlx
+regex: .*\.html$
+
+a silaba por deve aparecer dentro de uma palavra, nunca no inicio ou fim
+target: português proporcional compor
+regex: \Bpor\B
+
+regex no framework Django Python
+target: https://cursos.alura.com.br/courses/expressoes-regulares2/sections/3/exercises/15179/answer/4766568
+regex_url = r'(.*/exercises/\d+/answer/\d+)$'
