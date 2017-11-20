@@ -34,6 +34,12 @@ inversão do \b, o non-word-boundary: \B (B maiúsculo)
 ^ é uma âncora que seleciona o início da string alvo
 $ é uma âncora que seleciona o fim do alvo
 
+Um grupo é definido através de parênteses ()
+Non-capturing groups ?: não devolver um grupo pela regex
+
+Non-Capturing group - (?:de\s+) (não deve devolver o grupo formado pela preposição de e por um \s)
+Quantifier - [a-z]? (a classe deve ocorrer zero ou uma vez)
+
 --
 
 extensão
@@ -143,3 +149,41 @@ regex: \Bpor\B
 regex no framework Django Python
 target: https://cursos.alura.com.br/courses/expressoes-regulares2/sections/3/exercises/15179/answer/4766568
 regex_url = r'(.*/exercises/\d+/answer/\d+)$'
+
+devolver os grupos (21 de Maio de 1993 ||| 21 ||| Maio ||| 1993)
+target: João Fulano,123.456.789-00,21 de Maio de 1993,(21) 3079-9987,Rua do Ouvidor,50,20040-030,Rio de Janeiro
+regex: ([0123]?\d)\s+(?:de\s+)?([A-Z][a-zç]{1,8})\s+(?:de\s+)?([12]\d{3})
+
+recuperar o digito verificador
+target: 123.456.789-00
+regex: \d{3}[-.]?\d{3}[.-]?\d{3}[.-]?(\d{2})
+
+lei de formação: cada letra da palavra recebe o prefixo Z, mas não apenas isso. A letra Z é seguida de um número com um ou mais dígitos
+target: Z171PZ7AZ23PZ7819AZ78GZ1AZ99IZ34O
+regex: Z\d+(\w)
+
+uma Regex que possa encontrar essa linha e separar em dois grupos, Causa e Descrição
+target: Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+regex: (Caused[\s\w:.-]+):([\w\s]+) 
+       (^Caused by:.*:)(.*)
+
+extrai o nome do usuário do email
+target: super.mario@caelum.com.br 
+        donkey.kong@alura.com.br
+        bowser1@alura.com.br
+regex: ([a-z.]{4,14}[a-z\d])@(?:caelum.com.br|alura.com.br)
+
+validação de email
+target: donkey.kong@kart.com.br
+        bowser1@games.info 
+        super-mario@nintendo.JP
+        TEAM.donkey-kong@MARIO.kart1.nintendo.com
+regex:  ^([\w-]\.?)+@([\w-]+\.)+([A-Za-z]{2,4})+$
+        ^([\w.-]+[a-z\d])@([\w]+\.)+([A-Za-z]{2,4})+$
+
+coletar as informações: Nome, Rua, Número e CEP
+target: Nico Steppat|14/05/1977|Rua Buarque de Macedo|50|22222-222|Rio de Janeiro
+        Romulo Henrique|14/06/1993|Rua do Lins|120|12345-322|Rio de Janeiro
+        Leonardo Cordeiro|01/01/1995|Rua de Campo Grande|01|00001-234|Rio de Janeiro
+regex:  ([\w\s]+)\|(?:\d\d\/\d\d\/\d\d\d\d)\|([\w\s]+)\|(\d{1,4})\|(\d{5}-\d{3})\|(?:[\w\s]{10,})
+        ([a-zA-Z\s])+\|(\d{2}\/\d{2}\/\d{4})\|([a-zA-Z\s])+\|(\d{+})\|(\d{5}-\d{3})\|(?:[a-zA-Z\s])+
