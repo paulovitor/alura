@@ -40,6 +40,10 @@ Non-capturing groups ?: não devolver um grupo pela regex
 Non-Capturing group - (?:de\s+) (não deve devolver o grupo formado pela preposição de e por um \s)
 Quantifier - [a-z]? (a classe deve ocorrer zero ou uma vez)
 
+Todos os quantifiers são gananciosos por padrão (eles automaticamente selecionam o máximo de caracteres por padrão)
+
+back-references, uma referência para um texto já encontrado
+
 --
 
 extensão
@@ -187,3 +191,36 @@ target: Nico Steppat|14/05/1977|Rua Buarque de Macedo|50|22222-222|Rio de Janeir
         Leonardo Cordeiro|01/01/1995|Rua de Campo Grande|01|00001-234|Rio de Janeiro
 regex:  ([\w\s]+)\|(?:\d\d\/\d\d\/\d\d\d\d)\|([\w\s]+)\|(\d{1,4})\|(\d{5}-\d{3})\|(?:[\w\s]{10,})
         ([a-zA-Z\s])+\|(\d{2}\/\d{2}\/\d{4})\|([a-zA-Z\s])+\|(\d{+})\|(\d{5}-\d{3})\|(?:[a-zA-Z\s])+
+
+recuperar conteúdo de uma tag h1
+target: <h1 class="text-left">Expressões regulares</h1>
+regex: <h1.+?>([\w\sõãí.]+)</h1>
+
+regex preguiçosa
+target: alura
+regex: [a-z]+?
+
+recuperar conteúdo de uma tag h1 e h2
+target: <h1 class="text-left">Expressões regulares</h1>
+regex: <(h1|h2).+?>([\w\sõãí.]+)<\/\1>
+
+garantir o fechamento de uma tag de prioridade p1, p2 ... p9
+target: <soap:Envelope xmlns:soap="http://www.w3.org/2001/12/soap-envelope" 
+               soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
+
+<soap:Body xmlns:m="http://www.caelum.com.br/produto">
+  <m:GetStock>
+    <p1> ... </p1>
+  </m:GetStock>
+</soap:Body>
+
+</soap:Envelope>
+regex: <(p[1-9])>.*<\/\1>
+
+classe de caracteres que seleciona tudo que não é um >
+target: target: <h1 class="text-left">Expressões regulares</h1>
+regex: <h1[^>]+>
+
+devolve o que não queriamos
+target: Z171PZ7AZ23PZ7819AZ78GZ1AZ99IZ34O
+regex: [^Z\d]
