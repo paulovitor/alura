@@ -10,8 +10,9 @@ public class Curso {
 	// ArrayList é rápido na hora de recuperar - get
 	// porém é lento na inserção, caso precise add na 1 posição,
 	// vai ser preciso mover todos os elementos seguintes (consumo de tempo linear)
-	
-	// LinkedList é mais rápido na inserção e remoção, pois utiliza a estrutura de dados (lista ligada)
+
+	// LinkedList é mais rápido na inserção e remoção, pois utiliza a estrutura de
+	// dados (lista ligada)
 	// porém é lento para recuperar um elemento
 
 	public Curso(String nome, String instrutor) {
@@ -33,5 +34,15 @@ public class Curso {
 
 	public void adiciona(Aula aula) {
 		this.aulas.add(aula);
+	}
+
+	public int getTempoTotal() {
+		return this.aulas.stream().mapToInt(Aula::getTempo).sum();
+	}
+
+	@Override
+	public String toString() {
+		return "[Curso: " + this.getNome() + ", tempo total: " + this.getTempoTotal() + ", aulas: + " + this.aulas
+				+ "]";
 	}
 }
