@@ -1,3 +1,4 @@
+package br.com.alura;
 public class TestaCurso {
 
 	public static void main(String[] args) {
