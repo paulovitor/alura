@@ -8,18 +8,18 @@
     <form @submit.prevent="gravar()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
-        <input :value="foto.titulo" @input="foto.titulo = $event.target.value" id="titulo" autocomplete="off">
+        <input v-model="foto.titulo" id="titulo" autocomplete="off">
       </div>
 
       <div class="controle">
         <label for="url">URL</label>
-        <input :value="foto.url" @input="foto.url = $event.target.value" id="url" autocomplete="off">
-        <imagem-responsiva/>
+        <input v-model.lazy="foto.url" id="url" autocomplete="off">
+        <imagem-responsiva v-show="foto.url" :url="foto.url" :titulo="foto.titulo"/>
       </div>
 
       <div class="controle">
         <label for="descricao">DESCRIÇÃO</label>
-        <textarea :value="foto.descricao" @input="foto.descricao = $event.target.value" id="descricao" autocomplete="off"></textarea>
+        <textarea v-model.lazy="foto.descricao" id="descricao" autocomplete="off"></textarea>
       </div>
 
       <div class="centralizado">
@@ -32,8 +32,9 @@
 </template>
 
 <script>
-import ImagemResponsiva from "../shared/imagem-responsiva/ImagemResponsiva.vue";
-import Botao from "../shared/botao/Botao.vue";
+import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue';
+import Botao from '../shared/botao/Botao.vue';
+import Foto from '../../domain/foto/Foto';
 
 export default {
 
@@ -43,17 +44,14 @@ export default {
   },
   data() {
     return {
-      foto: {
-        titulo: "",
-        url: "",
-        descricao: ""
-      }
+      foto: new Foto()
     };
   },
   methods: {
     gravar() {
-      console.log(this.foto);
-      this.foto = {};
+      this.$http
+        .post('http://localhost:3000/v1/fotos', this.foto)
+        .then(() => this.foto = new Foto(), err => console.log(this.foto));
     }
   }
 };
