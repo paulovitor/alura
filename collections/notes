@@ -1,0 +1,7 @@
+- 	ArrayList é rápido na hora de recuperar - get
+	porém é lento na inserção, caso precise add na 1 posição,
+	vai ser preciso mover todos os elementos seguintes (consumo de tempo linear)
+
+- 	LinkedList é mais rápido na inserção e remoção, pois utiliza a estrutura de
+	dados (lista ligada)
+	porém é lento para recuperar um elemento
