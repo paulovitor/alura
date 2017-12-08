@@ -25,5 +25,9 @@ public class TestaCursoComAluno {
 		
 		Set<Aluno> alunosSincronizados = Collections.synchronizedSet(curso.getAlunos());
 		System.out.println(alunosSincronizados);
+		
+		Aluno turini = new Aluno("Rodrigo Turini", 34672);
+		System.out.println("E esse Turini, está matriculado?");
+		System.out.println(curso.estaMatriculado(turini));
 	}
 }
