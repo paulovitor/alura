@@ -11,7 +11,9 @@ public class Curso {
 	private String nome;
 	private String instrutor;
 	private List<Aula> aulas = new LinkedList<Aula>();
-	private Set<Aluno> alunos = new HashSet<>();
+	private Set<Aluno> alunos = new HashSet<>(); // não guarda a ordem de inserção
+//	private Set<Aluno> alunos = new LinkedHashSet<>(); // guarda a ordem de inserção
+//	private Set<Aluno> alunos = new TreeSet<>(); // guarda a ordem natural (mas é preciso que os elementos implements Comparable)
 
 	public Curso(String nome, String instrutor) {
 		this.nome = nome;

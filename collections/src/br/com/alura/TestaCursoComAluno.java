@@ -1,6 +1,7 @@
 package br.com.alura;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Set;
 
 public class TestaCursoComAluno {
@@ -29,5 +30,14 @@ public class TestaCursoComAluno {
 		Aluno turini = new Aluno("Rodrigo Turini", 34672);
 		System.out.println("E esse Turini, está matriculado?");
 		System.out.println(curso.estaMatriculado(turini));
+		
+		Set<Aluno> alunos = curso.getAlunos();
+		Iterator<Aluno> iterador = alunos.iterator();
+		
+		while (iterador.hasNext()) {
+		    System.out.println(iterador.next());
+		}
+		
+//		Vector<Aluno> vetor = new Vector<>(); // thread safe, implements List
 	}
 }
