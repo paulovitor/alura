@@ -8,7 +8,6 @@ import { EscolhaPage } from '../escolha/escolha';
 import { Carro } from '../../domain/carro/carro';
 
 @Component({
-  selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {

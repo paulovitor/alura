@@ -3,6 +3,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { EscolhaPage } from '../pages/escolha/escolha';
+import { CadastroPage } from '../pages/cadastro/cadastro';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
@@ -14,7 +15,8 @@ import 'rxjs/add/operator/toPromise';
   declarations: [
     MyApp,
     HomePage,
-    EscolhaPage
+    EscolhaPage,
+    CadastroPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -25,7 +27,8 @@ import 'rxjs/add/operator/toPromise';
   entryComponents: [
     MyApp,
     HomePage,
-    EscolhaPage
+    EscolhaPage,
+    CadastroPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
