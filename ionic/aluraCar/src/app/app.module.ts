@@ -11,6 +11,8 @@ import { HttpModule } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
+import { AgendamentoService } from '../domain/agendamento/agendamento-service';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -30,6 +32,9 @@ import 'rxjs/add/operator/toPromise';
     EscolhaPage,
     CadastroPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AgendamentoService
+  ]
 })
 export class AppModule {}
