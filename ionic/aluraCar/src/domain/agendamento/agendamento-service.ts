@@ -10,7 +10,7 @@ export class AgendamentoService {
     constructor(private _http: Http, private _dao: AgendamentoDao) { }
 
     agenda(agendamento: Agendamento) {
-        let api: string = `https://aluracar.herokuapp.com/salvarpedido?carro=${agendamento.carro.nome}&nome=${agendamento.nome}&preco=${agendamento.valor}&endereco=${agendamento.endereco}&email=${agendamento.email}&dataAgendamento=${agendamento.data}`;
+        let api = this._montaUri(agendamento);
         return this._dao.ehAgendamentoDuplicado(agendamento)
             .then(existe => {
                 if (existe) throw new Error('Esse agendamento já foi realizado');
@@ -21,6 +21,20 @@ export class AgendamentoService {
                     .then(() => this._dao.salva(agendamento))
                     .then(() => agendamento.confirmado);
             });
+    }
+
+    reagenda(agendamento: Agendamento) {
+        let api = this._montaUri(agendamento);
+        return this._http
+            .get(api)
+            .toPromise()
+            .then(() => agendamento.confirmado = true, err => console.log(err))
+            .then(() => this._dao.salva(agendamento))
+            .then(() => agendamento.confirmado);
+    }
+
+    private _montaUri(agendamento: Agendamento) {
+        return `https://aluracar.herokuapp.com/salvarpedido?carro=${agendamento.carro.nome}&preco=${agendamento.valor}&nome=${agendamento.nome}&endereco=${agendamento.endereco}&email=${agendamento.email}&dataAgendamento=${agendamento.data}`;
     }
 
 }
