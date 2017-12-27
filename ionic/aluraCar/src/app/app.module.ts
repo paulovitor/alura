@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { EscolhaPage } from '../pages/escolha/escolha';
 import { CadastroPage } from '../pages/cadastro/cadastro';
+import { AgendamentosPage } from '../pages/agendamentos/agendamentos';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
@@ -21,7 +22,8 @@ import { IonicStorageModule } from "@ionic/storage";
     MyApp,
     HomePage,
     EscolhaPage,
-    CadastroPage
+    CadastroPage,
+    AgendamentosPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -37,7 +39,8 @@ import { IonicStorageModule } from "@ionic/storage";
     MyApp,
     HomePage,
     EscolhaPage,
-    CadastroPage
+    CadastroPage,
+    AgendamentosPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
