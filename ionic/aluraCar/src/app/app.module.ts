@@ -5,6 +5,8 @@ import { HomePage } from '../pages/home/home';
 import { EscolhaPage } from '../pages/escolha/escolha';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { AgendamentosPage } from '../pages/agendamentos/agendamentos';
+import { LoginPage } from '../pages/login/login';
+import { PerfilPage } from '../pages/perfil/perfil';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
@@ -14,6 +16,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { AgendamentoService } from '../domain/agendamento/agendamento-service';
 import { AgendamentoDao } from '../domain/agendamento/agendamento-dao';
+import { UsuarioService } from '../domain/usuario/usuario-service';
 
 import { IonicStorageModule } from "@ionic/storage";
 
@@ -23,7 +26,9 @@ import { IonicStorageModule } from "@ionic/storage";
     HomePage,
     EscolhaPage,
     CadastroPage,
-    AgendamentosPage
+    AgendamentosPage,
+    LoginPage,
+    PerfilPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -40,12 +45,15 @@ import { IonicStorageModule } from "@ionic/storage";
     HomePage,
     EscolhaPage,
     CadastroPage,
-    AgendamentosPage
+    AgendamentosPage,
+    LoginPage,
+    PerfilPage
   ],
   providers: [
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     AgendamentoService,
-    AgendamentoDao
+    AgendamentoDao,
+    UsuarioService
   ]
 })
-export class AppModule {}
+export class AppModule { }
