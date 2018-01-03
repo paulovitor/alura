@@ -20,6 +20,12 @@ import { UsuarioService } from '../domain/usuario/usuario-service';
 
 import { IonicStorageModule } from "@ionic/storage";
 
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { Vibration } from '@ionic-native/vibration'; 
+import { DatePicker } from '@ionic-native/date-picker'; 
+import { Camera } from '@ionic-native/camera';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -53,7 +59,12 @@ import { IonicStorageModule } from "@ionic/storage";
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AgendamentoService,
     AgendamentoDao,
-    UsuarioService
+    UsuarioService,
+    SplashScreen,
+    StatusBar,
+    Vibration,
+    DatePicker,
+    Camera
   ]
 })
 export class AppModule { }
