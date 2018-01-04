@@ -7,6 +7,10 @@ export default class FotoService {
     }
 
     cadastra(foto) {
+        if (foto._id) {
+            return this._resource
+                .update({ id: foto._id }, foto);
+        }
         return this._resource
             .save(foto);
     }
@@ -14,11 +18,26 @@ export default class FotoService {
     lista() {
         return this._resource
             .query()
-            .then(res => res.json());
+            .then(
+                res => res.json(),
+                err => {
+                    console.log(err);
+                    throw new Error('Não foi possível obter as fotos. Tenta mais tarde');
+                });
     }
 
     apaga(id) {
         return this._resource
-            .delete({ id });
+            .delete({ id })
+            .then(null, err => {
+                console.log(err);
+                throw new Error('Não foi possível remover a foto. Tente mais tarde');
+            });
+    }
+
+    busca(id) {
+        return this._resource
+            .get({ id })
+            .then(res => res.json());
     }
 }

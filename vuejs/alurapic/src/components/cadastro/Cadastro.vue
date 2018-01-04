@@ -3,6 +3,8 @@
 <template>
   <div>
     <h1 class="centralizado">Cadastro</h1>
+    <h1 v-if="foto._id" class="centralizado">Alteração</h1>
+    <h1 v-else class="centralizado">Inclusão</h1>
     <h2 class="centralizado">{{ foto.titulo }}</h2>
 
     <form @submit.prevent="gravar()">
@@ -32,52 +34,58 @@
 </template>
 
 <script>
-import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue';
-import Botao from '../shared/botao/Botao.vue';
-import Foto from '../../domain/foto/Foto';
-import FotoService from '../../domain/foto/FotoService';
+import ImagemResponsiva from "../shared/imagem-responsiva/ImagemResponsiva.vue";
+import Botao from "../shared/botao/Botao.vue";
+import Foto from "../../domain/foto/Foto";
+import FotoService from "../../domain/foto/FotoService";
 
 export default {
-
   components: {
     "imagem-responsiva": ImagemResponsiva,
     "meu-botao": Botao
   },
   data() {
     return {
-      foto: new Foto()
+      foto: new Foto(),
+      id: this.$route.params.id
     };
   },
   methods: {
     gravar() {
       this.service
         .cadastra(this.foto)
-        .then(() => this.foto = new Foto(), err => console.log(this.foto));
+        .then(() => {
+          if (this.id) this.$router.push({ name: 'home' });
+          this.foto = new Foto();
+        }, err => console.log(this.foto));
     }
   },
   created() {
     this.service = new FotoService(this.$resource);
+    if (this.id) {
+      this.service.busca(this.id).then(foto => (this.foto = foto));
+    }
   }
 };
 </script>
 
 <style scoped>
-  .centralizado {
-    text-align: center;
-  }
-  .controle {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-  }
-  .controle label {
-    display: block;
-    font-weight: bold;
-  }
+.centralizado {
+  text-align: center;
+}
+.controle {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+.controle label {
+  display: block;
+  font-weight: bold;
+}
 
-  .controle label + input,
-  .controle textarea {
-    width: 100%;
-    font-size: inherit;
-    border-radius: 5px;
-  }
+.controle label + input,
+.controle textarea {
+  width: 100%;
+  font-size: inherit;
+  border-radius: 5px;
+}
 </style>

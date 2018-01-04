@@ -13,6 +13,13 @@
         <meu-painel :titulo="foto.titulo">
           <imagem-responsiva :url="foto.url" :titulo="foto.titulo" v-meu-transform:rotate.animate.reverse="30"/>
           <!-- <imagem-responsiva :url="foto.url" :titulo="foto.titulo" v-meu-transform:scale.animate="1.2"/> -->
+          
+          <router-link :to="{ name: 'altera', params: { id : foto._id } }">
+            <meu-botao
+              rotulo="Alterar"
+              tipo="button"/>
+          </router-link>
+                
           <meu-botao 
             rotulo="remover"
             tipo="button"
@@ -27,47 +34,44 @@
 </template>
 
 <script>
-import Painel from '../shared/painel/Painel.vue';
-import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue';
-import Botao from '../shared/botao/Botao.vue';
-import Transform from '../../directives/Transform';
-import FotoService from '../../domain/foto/FotoService';
+import Painel from "../shared/painel/Painel.vue";
+import ImagemResponsiva from "../shared/imagem-responsiva/ImagemResponsiva.vue";
+import Botao from "../shared/botao/Botao.vue";
+import Transform from "../../directives/Transform";
+import FotoService from "../../domain/foto/FotoService";
 
 export default {
-
   components: {
-    'meu-painel': Painel,
-    'imagem-responsiva': ImagemResponsiva,
-    'meu-botao': Botao
+    "meu-painel": Painel,
+    "imagem-responsiva": ImagemResponsiva,
+    "meu-botao": Botao
   },
   directives: {
-    'meu-transform': Transform
+    "meu-transform": Transform
   },
   data() {
     return {
       fotos: [],
-      filtro: '',
-      mensagem: ''
-    }
+      filtro: "",
+      mensagem: ""
+    };
   },
   methods: {
     remove(foto) {
-      this.service
-        .apaga(foto._id)
-        .then(() => {
+      this.service.apaga(foto._id).then(
+        () => {
           let indice = this.fotos.indexOf(foto);
           this.fotos.splice(indice, 1);
-          this.mensagem = 'Foto removida com sucesso';
-        }, err => {
-          console.log(err);
-          this.mensagem = 'Não foi possível remover a foto';
-        });
+          this.mensagem = "Foto removida com sucesso";
+        },
+        err => this.mensagem = err.message
+      );
     }
   },
   computed: {
     fotosComFiltro() {
       if (this.filtro) {
-        let exp = new RegExp(this.filtro.trim(), 'i');
+        let exp = new RegExp(this.filtro.trim(), "i");
         return this.fotos.filter(foto => exp.test(foto.titulo));
       } else {
         return this.fotos;
@@ -78,30 +82,30 @@ export default {
     this.service = new FotoService(this.$resource);
     this.service
       .lista()
-      .then(fotos => this.fotos = fotos, err => console.log(err));
+      .then(fotos => (this.fotos = fotos), err => this.mensagem = err.message);
   }
-}
+};
 </script>
 
 <style>
-  .centralizado {
-    text-align: center;
-  }
+.centralizado {
+  text-align: center;
+}
 
-  .lista-fotos {
-    list-style: none;
-  }
+.lista-fotos {
+  list-style: none;
+}
 
-  .lista-fotos .lista-fotos-item {
-    display: inline-block;
-  }
+.lista-fotos .lista-fotos-item {
+  display: inline-block;
+}
 
-  .filtro {
-    display: block;
-    width: 100%;
-  }
+.filtro {
+  display: block;
+  width: 100%;
+}
 
-  .painel-conteudo {
-    overflow: hidden;
-  }
+.painel-conteudo {
+  overflow: hidden;
+}
 </style>
