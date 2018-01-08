@@ -46,7 +46,9 @@ export default {
 }
 </script>    
 
-<style scoped>
+<style scoped lang="scss">
+    $cor: firebrick;
+
     .botao {
         display: inline-block;
         padding: 10px;
