@@ -1,0 +1,5 @@
+Qual das expressões a seguir é inválida?
+
+Predicate<String> startsWithA = s -> s.startsWith("A")
+> Predicate<Integer> big = list -> list.size() > 100 // Integer nao tem um método chamado size()
+Predicate<List> bigger = list -> list.size() > 1000

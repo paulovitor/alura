@@ -1,0 +1,41 @@
+http://javabeat.net/ocajp-mock-exam-questions-java-basics/
+
+Q1 (OK)
+a) public
+b) static
+c) void
+
+Q 2 (OK)
+c) i, j and sum
+
+Q 3 (OK)
+c) This is a valid variable declaration: int _52 = 52;
+d) This is a valid instance variable declaration: int i, j = 10;
+
+Q 4 (OK)
+a) “year” is a numeric variable.
+b) ‘System.out.println(“This year is: ” + year);’ is a statement.
+c) “YearPrinter” is the name of a class.
+d) “main” is the name of a method.
+e) “//” is used to write a comment within a class.
+
+Q 5 (ERROR - c is correct too) 
+a)
+b)
+d)
+
+Q 6 (ERROR - c and d are correct too)
+a) A source code file.
+b) Java programming language compiler.
+
+Q 7 (ERROR - b is correct)
+a) There is a compile time error.
+
+Q 8 (ERROR - a is correct too)
+b) The above class can be run at the command prompt using the command “java mypackage.ClassA”.
+
+Q 9 (OK)
+TRUE
+
+Q 10 (OK)
+a) Both ProgramA and ProgramB compile, run and print “An element is added to the arraylist .”.

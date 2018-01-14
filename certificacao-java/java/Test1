@@ -1,0 +1,6 @@
+Para aumentar o encapsulamento de uma classe, devemos:
+Deixar os métodos e atributos privados
+Deixar os métodos e atributos públicos
+Deixar os métodos públicos e atributos públicos
+> Deixar os métodos públicos e atributos privados
+Deixar os métodos privados e atributos públicos

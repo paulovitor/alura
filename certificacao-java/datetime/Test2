@@ -1,0 +1,6 @@
+A classe que representa um horário sem data é:
+
+Time
+> LocalTime
+TimeZone
+LocalDateTime

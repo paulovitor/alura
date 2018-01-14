@@ -1,0 +1,6 @@
+Qual código cria um objeto com a data e hora atual?
+
+LocalDateTime.current()
+> LocalDateTime.now()
+new LocalDateTime()
+LocalDate.now()

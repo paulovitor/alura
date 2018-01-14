@@ -1,0 +1,10 @@
+int[] array = new int[10]; // ok
+int array[] = new int[10]; // ok
+int[] array = new int[];
+int array[] = new int[];
+int[] array = new int[2]{1, 2};
+int[] array = new int[]{1, 2}; // ok
+int[] array = int[10];
+int[] array = new int[1, 2, 3];
+int array[] = new int[1, 2, 3];
+int array[] = {1, 2, 3}; // ok
