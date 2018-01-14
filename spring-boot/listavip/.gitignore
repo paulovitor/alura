@@ -1,0 +1,11 @@
+target/
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+
+### Eclipse ###
+.settings/
+.vscode/
+.classpath
+.project
