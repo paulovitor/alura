@@ -1,0 +1,6 @@
+Qual o trecho de código que converte um objeto Date em um objeto LocalDate?
+
+LocalDateTime.ofInstant(d.toInstant()).toLocalDate()
+> LocalDateTime.ofInstant(d.toInstant(), ZoneId.systemDefault()).toLocalDate()
+LocalDateTime.from(d.toInstant()).toLocalDate()
+LocalDate.from(d.toInstant())

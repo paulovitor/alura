@@ -1,0 +1,7 @@
+Dentre as classes a seguir qual delas não é checked?
+
+java.io.FileNotFoundException
+> java.lang.IndexOutOfBoundsException
+java.io.IOException
+java.lang.Exception
+java.sql.SQLException

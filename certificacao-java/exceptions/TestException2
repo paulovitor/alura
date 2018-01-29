@@ -1,0 +1,8 @@
+De que maneira a API de exceptions pode ajudar a melhorar o código de seu programa?
+Escolha 2 opções:
+
+a - Permitindo separar o tratamento de erro da lógica do programa.
+b - Permitindo tratar o erro no mesmo ponto onde ele ocorre. (estão incorretas por serem os opostos das certas)
+c - Permitindo estender as classes que já existem e criar novas exceptions.
+d - Disponibilizando várias classes com todas as exceptions possíveis prontas. (estão incorretas por serem os opostos das certas)
+e - Aumentando a segurança da aplicação disponibilizando os erros nos logs. (está incorreta pois exceptions não são maneiras de aumentar a segurança)

@@ -1,0 +1,6 @@
+Qual o código que calcula a diferença em dias entre dois LocalDate d1 e d2?
+
+> ChronoUnit.DAYS.between(d1,d2);
+ChronoUnit.DAYS.difference(d1,d2);
+Period.between(d1,d2);
+ChronoUnit.Days.between(d1,d2);

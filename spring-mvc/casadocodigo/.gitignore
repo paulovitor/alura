@@ -1,0 +1,12 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Maven template
+target/
+
+### JetBrains template
+.idea/
+casadocodigo.iml
+
+### Eclipse
+.classpath
+.project
+.settings/
