@@ -1,14 +1,28 @@
 package capitulo5;
 
-public class ContaDeEstudante extends ContaComum {
+public class ContaDeEstudante implements Conta {
 
-	public void rende() {
-		throw new ContaNaoRendeException();
+	private ManipuladorDeSaldo manipulador;
+	private int milhas;
+
+	public ContaDeEstudante() {
+		this.manipulador = new ManipuladorDeSaldo();
 	}
 
-	class ContaNaoRendeException extends RuntimeException {
+	public void deposita(double valor) {
+		this.manipulador.deposita(valor);
+		this.milhas += (int) valor;
+	}
 
-		private static final long serialVersionUID = 1L;
+	public int getMilhas() {
+		return this.milhas;
+	}
 
+	public void rende() {
+		this.manipulador.rende(0.5);
+	}
+
+	public double getSaldo() {
+		return manipulador.getSaldo();
 	}
 }

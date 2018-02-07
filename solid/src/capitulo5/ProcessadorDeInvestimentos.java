@@ -6,7 +6,7 @@ import java.util.List;
 public class ProcessadorDeInvestimentos {
 
 	public static void main(String[] args) {
-		for (ContaComum conta : contasDoBanco()) {
+		for (Conta conta : contasDoBanco()) {
 			conta.rende();
 
 			System.out.println("Novo Saldo:");
@@ -14,17 +14,17 @@ public class ProcessadorDeInvestimentos {
 		}
 	}
 
-	private static List<ContaComum> contasDoBanco() {
+	private static List<Conta> contasDoBanco() {
 		return Arrays.asList(umaContaCom(100), umaContaCom(150), contaDeEstudanteCom(200));
 	}
 
-	private static ContaComum contaDeEstudanteCom(double amount) {
+	private static Conta contaDeEstudanteCom(double amount) {
 		ContaDeEstudante c = new ContaDeEstudante();
 		c.deposita(amount);
 		return c;
 	}
 
-	private static ContaComum umaContaCom(double valor) {
+	private static Conta umaContaCom(double valor) {
 		ContaComum c = new ContaComum();
 		c.deposita(valor);
 		return c;

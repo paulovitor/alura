@@ -1,22 +1,26 @@
 package capitulo5;
 
-public class ContaComum {
+public class ContaComum implements Conta {
 
-	protected double saldo;
+	private ManipuladorDeSaldo manipulador;
 
 	public ContaComum() {
-		this.saldo = 0;
+		this.manipulador = new ManipuladorDeSaldo();
+	}
+
+	public void saca(double valor) {
+		manipulador.saca(valor);
 	}
 
 	public void deposita(double valor) {
-		this.saldo += valor;
-	}
-
-	public double getSaldo() {
-		return saldo;
+		manipulador.deposita(valor);
 	}
 
 	public void rende() {
-		this.saldo *= 1.1;
+		this.manipulador.rende(1.1);
+	}
+
+	public double getSaldo() {
+		return manipulador.getSaldo();
 	}
 }
