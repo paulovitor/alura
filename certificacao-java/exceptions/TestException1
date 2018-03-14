@@ -1,0 +1,8 @@
+Escolha 2 opções.
+Exception é um mecanismo para...
+
+a - tratar entrada de dados do usuário. (está errada pois podemos usar exceptions mesmo sem entradas do usuário)
+b - que você pode usar para determinar o que fazer quando algo inesperado acontece.
+c - que a VM usa para fechar o programa caso algo inesperado aconteça. (está errada pois podemos manter o programa rodando mesmo que uma exception ocorra)
+d - controlar o fluxo da aplicação. (está errada pois devemos usar outras estruturas para controlar o fluxo de nosso programa, como if por exemplo)
+e - separar o tratamento de erros da lógica principal.
