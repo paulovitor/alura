@@ -1,0 +1,14 @@
+# eclipse project file
+
+/.apt_generated/
+/target/
+
+.settings/
+.metadata/
+.classpath
+.project
+.factorypath
+
+.DS_Store
+
+*.class
