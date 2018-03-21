@@ -1,6 +1,8 @@
 package br.com.alura.loja.modelo;
 
 
+import com.thoughtworks.xstream.XStream;
+
 public class Produto {
 
 	private double preco;
@@ -37,5 +39,13 @@ public class Produto {
 
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
+	}
+
+    public static Produto fromXML(String conteudo) {
+		return (Produto) new XStream().fromXML(conteudo);
+    }
+
+	public String toXML() {
+		return new XStream().toXML(this);
 	}
 }

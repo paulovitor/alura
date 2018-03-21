@@ -86,4 +86,12 @@ public class Carrinho {
 		return (Carrinho) new XStream().fromXML(conteudo);
 	}
 
+	public Produto getProduto(long produtoId) {
+		for (Produto produto : produtos) {
+			if (produto.getId() == produtoId)
+				return produto;
+		}
+
+		return null;
+	}
 }
