@@ -38,8 +38,7 @@ public class ProjetoTest {
 
 	@Test
 	public void testaQueSuportaNovosCarrinhos() {
-		String conteudo = target.path("/projetos/1").request().get(String.class);
-		Projeto projeto = (Projeto) new XStream().fromXML(conteudo);
+		Projeto projeto = target.path("/projetos/1").request().get(Projeto.class);
 
 		Assert.assertEquals("Minha loja", projeto.getNome());
 	}
@@ -47,16 +46,15 @@ public class ProjetoTest {
 	@Test
 	public void testaAdicionarNovoProjeto() {
 		Projeto projeto = new Projeto(3l, "Nova loja", 2018);
-		String xml = projeto.toXML();
 
-		Entity<String> entity = Entity.entity(xml, MediaType.APPLICATION_XML);
+		Entity<Projeto> entity = Entity.entity(projeto, MediaType.APPLICATION_XML);
 
 		Response response = target.path("/projetos").request().post(entity);
 		Assert.assertEquals(201, response.getStatus());
 
 		String location = response.getHeaderString("Location");
-		String conteudo = client.target(location).request().get(String.class);
-		Assert.assertTrue(conteudo.contains("Nova loja"));
+		Projeto projetoRetornado = client.target(location).request().get(Projeto.class);
+		Assert.assertTrue(projetoRetornado.getNome().contains("Nova loja"));
 	}
 
 }
